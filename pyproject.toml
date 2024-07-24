@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "evaluator"
+version = "0.1.0"
+description = ""
+authors = ["Ivan Shevchenko <shevchenko.id@dns-shop.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+mlflow = "^2.14.2"
+minio = "^7.2.7"
+opencv-python = "^4.10.0.84"
+torch = "^2.3.1"
+loguru = "^0.7.2"
+ultralytics = "^8.2.53"
+pydantic = "^2.8.2"
+pydantic-settings = "^2.3.4"
+torchvision = "^0.18.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]
+line-length = 79
+extend-exclude = ["hooks/"]
+
+[tool.ruff.lint]
+ignore = ["B008"]
+select = ["A", "B", "C", "E", "F", "I", "Q", "ASYNC", "N", "W", "UP", "T20", "SIM", "ANN204"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402", "F401", "F403"] # unused imports
+"models.py" = ["N805", "A003"] # cls instead self, id for modles
+"schemas.py" = ["N805", "A003"] # cls instead self, id for modles
+"mixins.py" = ["N805", "A003"] # cls instead self, id for modles
+"requests.py" = ["N805", "A003"] # cls instead self, id for modles
