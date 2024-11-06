@@ -5,6 +5,7 @@ import mlflow
 import torch
 import yaml
 from loguru import logger
+from tqdm import tqdm
 
 from settings.config import settings
 from src.estimators import Detector
@@ -17,15 +18,14 @@ if __name__ == "__main__":
         config = yaml.safe_load(stream=f)
     detector = Detector(settings.detectors_path)
     model2config = {}
-
-    for key_model, value_model in detector.model.names.items(): # type: ignore
+    for key_model, value_model in tqdm(detector.model.names.items()): # type: ignore
         for key_config, value_config in config["names"].items():
             if value_model == value_config:
                 model2config[key_config] = key_model
 
     logger.info(f"Join model and config id successfuly {model2config}")
 
-    for path in settings.test_set_path.joinpath("val/labels").glob("*"):
+    for path in tqdm(settings.test_set_path.joinpath("train/labels").glob("*")):
         contents = get_file_content(path)
         for content in contents:
             content[0] = model2config[content[0]]

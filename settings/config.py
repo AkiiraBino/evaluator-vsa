@@ -59,7 +59,7 @@ class Settings(BaseSettings, case_sensitive=False):
     @computed_field()
     @property
     def config_path(self) -> FilePath:
-        return self.test_set_path.joinpath("example.yaml")
+        return self.test_set_path.joinpath("coco.yaml")
 
 
 settings = Settings()  # type: ignore
